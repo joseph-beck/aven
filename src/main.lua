@@ -10,36 +10,22 @@ local Camera = require("camera")
 local Map = require("map")
 
 function love.load()
-    -- player sprite https://rvros.itch.io/animated-pixel-hero
-    -- map tiles https://trixelized.itch.io/starstring-fields
-    -- coin sprite https://untiedgames.itch.io/super-pixel-objects-sample
-    -- font https://www.dafont.com/alagard.font
-
     Map:load()
-
     Background:load()
-
     GUI:load()
-
     Player:load()
 end
 
 function love.update(dt)
-    --World:update(dt)
     Map:update(dt)
-    
     Player:update(dt)
 
     Coin.updateAll(dt)
-
     Spike.updateAll(dt)
-
     Barrel.updateAll(dt)
 
     GUI:update(dt)
-
     Camera:setPosition(Player.x, 0)
-
     Background:update(dt)
 end
 
@@ -59,7 +45,6 @@ function love.draw()
 	Camera:clear()
 
     Map:draw()
-
     GUI:draw()
 end
 
