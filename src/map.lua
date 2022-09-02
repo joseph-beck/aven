@@ -1,6 +1,6 @@
 local Map = {}
 
-local STI = require("sti")
+local STI = require("libraries/sti")
 local Spike = require("spike")
 local Barrel = require("barrel")
 local Coin = require("coin")
