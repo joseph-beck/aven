@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="60" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="40">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="60" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="42">
  <editorsettings>
-  <export target="../dev-scene.lua" format="lua"/>
+  <export format="lua"/>
  </editorsettings>
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="198" columns="18">
   <image source="../../assets/tileset.png" width="288" height="176"/>
@@ -130,6 +130,8 @@
   <object id="37" name="Spike" class="spike" x="455" y="328.333"/>
   <object id="38" name="Spike" class="spike" x="488.333" y="328.333"/>
   <object id="39" name="Barrel" class="barrel" x="10" y="326.667"/>
+  <object id="40" name="Spike" class="spike" x="660.667" y="311.667"/>
+  <object id="41" name="Spike" class="spike" x="696" y="312"/>
  </objectgroup>
  <objectgroup color="#ff5500" id="5" name="solid">
   <properties>

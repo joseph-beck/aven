@@ -41,6 +41,14 @@ function Barrel.loadAll()
     end
 end
 
+function Barrel.removeAll()
+    for i, v in ipairs(ActiveBarrels) do
+        v.physics.body:destroy()
+    end
+
+    ActiveBarrels = {}
+end
+
 function Barrel.updateAll(dt)
     for i, instance in ipairs(ActiveBarrels) do
         instance:update(dt)

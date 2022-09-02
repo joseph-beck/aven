@@ -39,6 +39,15 @@ function Spike.loadAll()
     end
 end
 
+function Spike.removeAll()
+    for i, v in ipairs(ActiveSpikes) do
+        v.physics.body:destroy()
+    end
+
+    ActiveSpikes = {}
+end
+
+
 function Spike.updateAll(dt)
     for i, instance in ipairs(ActiveSpikes) do
         instance:update(dt)

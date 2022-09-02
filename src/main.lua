@@ -1,6 +1,5 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
-local STI = require("sti")
 local Background = require("background")
 local Player = require("player")
 local Coin = require("coin")
@@ -23,8 +22,6 @@ function love.load()
     GUI:load()
 
     Player:load()
-
-    Coin.loadAll()
 end
 
 function love.update(dt)
@@ -64,10 +61,6 @@ function love.draw()
     Map:draw()
 
     GUI:draw()
-end
-
-function love.keypressed(key)
-    Player:jump(key)
 end
 
 function beginContact(a, b, collision)

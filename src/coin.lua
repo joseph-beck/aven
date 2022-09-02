@@ -96,6 +96,14 @@ function Coin.loadAll()
     end
 end
 
+function Coin.removeAll()
+    for i, v in ipairs(ActiveCoins) do
+        v.physics.body:destroy()
+    end
+
+    ActiveCoins = {}
+end
+
 function Coin.updateAll(dt)
     for i, instance in ipairs(ActiveCoins) do
         instance:update(dt)

@@ -102,10 +102,14 @@ end
 
 function Player:respawn()
     if not self.alive then
-        self.physics.body:setPosition(self.startX, self.startY)
+        self:resetPosition()
         self.health.current = self.health.max
         self.alive = true
     end
+end
+
+function Player:resetPosition()
+    self.physics.body:setPosition(self.startX, self.startY)
 end
 
 function Player:update(dt)
@@ -260,6 +264,10 @@ function Player:draw()
     love.graphics.setColor(self.color.red, self.color.green, self.color.blue)
     love.graphics.draw(self.animation.draw, self.x, self.y, 0, scaleX, 1, self.animation.width / 2, self.animation.height / 2 + 2)
     love.graphics.setColor(1, 1, 1, 1)
+end
+
+function love.keypressed(key)
+    Player:jump(key)
 end
 
 return Player
