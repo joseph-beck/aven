@@ -8,6 +8,7 @@ local GUI = require("gui")
 local Spike = require("spike")
 local Barrel = require("barrel")
 local Camera = require("camera")
+local Map = require("map")
 
 function love.load()
     -- player sprite https://rvros.itch.io/animated-pixel-hero
@@ -15,29 +16,21 @@ function love.load()
     -- coin sprite https://untiedgames.itch.io/super-pixel-objects-sample
     -- font https://www.dafont.com/alagard.font
 
-    Map = STI("map/dev-scene.lua",  {"box2d"})
-    World = love.physics.newWorld(0, 2000)
-    World:setCallbacks(beginContact, endContact)
-    Map:box2d_init(World)
-    Map.layers.solid.visible = false
-    MapWidth = Map.layers.ground.width * 16
+    Map:load()
 
     Background:load()
-    GUI:load()
-    Player:load()
 
-    Coin.new(300, 250)
-    Coin.new(500, 250)
-    Coin.new(600, 200)
-    Spike.new(450, 330)
-    Barrel.new(300, 300)
+    GUI:load()
+
+    Player:load()
 
     Coin.loadAll()
 end
 
 function love.update(dt)
-    World:update(dt)
-
+    --World:update(dt)
+    Map:update(dt)
+    
     Player:update(dt)
 
     Coin.updateAll(dt)
@@ -56,21 +49,20 @@ end
 function love.draw()
 	Background:draw()
 
-	--Map:draw(0, -8, 2, 2)
+	-- if problems with drawing map behind player occur draw map here
 
 	Camera:apply()
 
     Player:draw()
 
     Coin.drawAll()
-
     Spike.drawAll()
-
     Barrel.drawAll()
 
 	Camera:clear()
 
-    Map:draw(-Camera.x, -Camera.y, Camera.scale, Camera.scale)
+    Map:draw()
+
     GUI:draw()
 end
 
