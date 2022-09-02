@@ -1,15 +1,19 @@
-Spike = {}
+local Player = require("player")
+
+local Spike = {}
 Spike.__index = Spike
-ActiveSpikes = {}
+local ActiveSpikes = {}
 
 function Spike.new(x, y)
     local instance = setmetatable({}, Spike)
 
     instance.x = x
     instance.y = y
-    instance.img = love.graphics.newImage("assets/spikes/1.png")
+    instance.img = love.graphics.newImage("assets/spikes/spikes_A_up.png")
     instance.width = instance.img:getWidth()
     instance.height = instance.img:getHeight()
+
+    instance.damage = 1
 
     instance.physics = {}
     instance.physics.body = love.physics.newBody(World, instance.x, instance.y, "static")
@@ -26,7 +30,7 @@ end
 
 
 function Spike:draw()
-    love.graphics.draw(self.animation.draw, self.x, self.y, 0, self.scaleX, 1, self.width / 2, self.height / 2)
+    love.graphics.draw(self.img, self.x, self.y, 0, self.scaleX, 1, self.width / 2, self.height / 2)
 end
 
 function Spike.loadAll()
@@ -47,12 +51,15 @@ function Spike.drawAll()
     end
 end
 
-function Spike:beginContact(a, b, collision)
+function Spike.beginContact(a, b, collision)
     for i, instance in  ipairs(ActiveSpikes) do
         if a == instance.physics.fixture or b == instance.physics.fixture then
             if a == Player.physics.fixture or b == Player.physics.fixture then
+                Player:takeDamage(instance.damage)
                 return true
             end
         end
     end
 end
+
+return Spike

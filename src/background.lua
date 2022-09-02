@@ -1,4 +1,4 @@
-Background = {}
+local Background = {}
 
 function Background:load()
     self.layerOne = love.graphics.newImage("assets/background/background-1.png")
@@ -13,3 +13,5 @@ end
 function Background:draw()
     love.graphics.draw(self.layerOne)
 end
+
+return Background

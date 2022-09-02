@@ -1,6 +1,8 @@
-Coin = {}
+local Player = require("player")
+
+local Coin = {}
 Coin.__index = Coin
-ActiveCoins = {}
+local ActiveCoins = {}
 
 function Coin.new(x, y)
     local instance = setmetatable({}, Coin)
@@ -106,7 +108,7 @@ function Coin.drawAll()
     end
 end
 
-function Coin:beginContact(a, b, collision)
+function Coin.beginContact(a, b, collision)
     for i, instance in  ipairs(ActiveCoins) do
         if a == instance.physics.fixture or b == instance.physics.fixture then
             if a == Player.physics.fixture or b == Player.physics.fixture then
@@ -116,3 +118,5 @@ function Coin:beginContact(a, b, collision)
         end
     end
 end
+
+return Coin

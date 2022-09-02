@@ -1,8 +1,10 @@
-Player = {}
+local Player = {}
 
 function Player:load()
     self.x = 100
     self.y = 0
+    self.startX = self.x
+    self.startY = self.y
     self.width = 10
     self.height = 30
 
@@ -15,10 +17,19 @@ function Player:load()
     self.jumpAmount = -500
 
     self.coins = 0
+    self.health = {current = 3, max = 3}
+
+    self.color = {
+        red = 1,
+        green = 1,
+        blue = 1,
+        speed = 3
+    }
 
     self.graceTime = 0
     self.graceDuration = 0.1
 
+    self.alive = true
     self.grounded = false
     self.hasDoubleJump = true
     self.direction = "right"
@@ -31,6 +42,7 @@ function Player:load()
     self.physics.body:setFixedRotation(true)
     self.physics.shape = love.physics.newRectangleShape(self.width, self.height)
     self.physics.fixture = love.physics.newFixture(self.physics.body, self.physics.shape)
+    self.physics.body:setGravityScale(0)
 end
 
 function Player:loadAssets()
@@ -60,7 +72,45 @@ function Player:incrementCoins()
     self.coins = self.coins + 1
 end
 
+function Player:takeDamage(amount)
+    self:tintRed()
+
+    if self.health.current - amount > 0 then
+        self.health.current = self.health.current - amount
+    else
+        self.health.current = 0
+        self:die()
+    end
+    print("Player health: "..self.health.current)
+end
+
+function Player:tintRed()
+    self.color.green = 0
+    self.color.blue = 0
+end
+
+function Player:unTint(dt)
+    self.color.red = math.min(self.color.red + self.color.speed * dt, 1)
+    self.color.green = math.min(self.color.green + self.color.speed * dt, 1)
+    self.color.blue = math.min(self.color.blue + self.color.speed * dt, 1)
+end
+
+function Player:die()
+    print("Player died")
+    self.alive = false
+end
+
+function Player:respawn()
+    if not self.alive then
+        self.physics.body:setPosition(self.startX, self.startY)
+        self.health.current = self.health.max
+        self.alive = true
+    end
+end
+
 function Player:update(dt)
+    self:unTint(dt)
+    self:respawn()
     self:setState()
     self:setDirection()
     self:animate(dt)
@@ -207,5 +257,9 @@ function Player:draw()
         scaleX = -1
     end
 
-    love.graphics.draw(self.animation.draw, self.x, self.y, 0, scaleX, 1, self.animation.width / 2, self.animation.height / 2 + 10)
+    love.graphics.setColor(self.color.red, self.color.green, self.color.blue)
+    love.graphics.draw(self.animation.draw, self.x, self.y, 0, scaleX, 1, self.animation.width / 2, self.animation.height / 2 + 2)
+    love.graphics.setColor(1, 1, 1, 1)
 end
+
+return Player
