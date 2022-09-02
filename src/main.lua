@@ -31,6 +31,7 @@ end
 
 function love.draw()
 	Background:draw()
+    --Map:draw()
     
 	Camera:apply()
 
