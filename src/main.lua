@@ -31,9 +31,7 @@ end
 
 function love.draw()
 	Background:draw()
-
-	-- if problems with drawing map behind player occur draw map here
-
+    
 	Camera:apply()
 
     Player:draw()
