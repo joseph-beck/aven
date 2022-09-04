@@ -1,4 +1,4 @@
-local Player = require("player")
+local Player = require("src/player")
 
 local Spike = {}
 Spike.__index = Spike

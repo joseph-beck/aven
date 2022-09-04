@@ -1,13 +1,13 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 
-local Background = require("background")
-local Player = require("player")
-local Coin = require("coin")
-local GUI = require("gui")
-local Spike = require("spike")
-local Barrel = require("barrel")
-local Camera = require("camera")
-local Map = require("map")
+local Background = require("src/background")
+local Player = require("src/player")
+local Coin = require("src/coin")
+local GUI = require("src/gui")
+local Spike = require("src/spike")
+local Barrel = require("src/barrel")
+local Camera = require("src/camera")
+local Map = require("src/map")
 
 function love.load()
     Map:load()
@@ -45,6 +45,14 @@ function love.draw()
 
     Map:draw()
     GUI:draw()
+end
+
+function love.keypressed(key)
+    Player:jump(key)
+
+    if key == 'escape' then
+        love.event.quit()
+    end
 end
 
 function beginContact(a, b, collision)

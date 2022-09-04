@@ -1,11 +1,11 @@
 local Map = {}
 
 local STI = require("libraries/sti")
-local Spike = require("spike")
-local Barrel = require("barrel")
-local Coin = require("coin")
-local Camera = require("camera")
-local Player = require("player")
+local Spike = require("src/spike")
+local Barrel = require("src/barrel")
+local Coin = require("src/coin")
+local Camera = require("src/camera")
+local Player = require("src/player")
 
 function Map:load()
     self.currentLevel = 1

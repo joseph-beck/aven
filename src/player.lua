@@ -266,8 +266,8 @@ function Player:draw()
     love.graphics.setColor(1, 1, 1, 1)
 end
 
-function love.keypressed(key)
-    Player:jump(key)
-end
+--function love.keypressed(key)
+--    Player:jump(key)
+--end
 
 return Player

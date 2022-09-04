@@ -1,4 +1,4 @@
-local Player = require("player")
+local Player = require("src/player")
 
 local Coin = {}
 Coin.__index = Coin
