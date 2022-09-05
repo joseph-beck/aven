@@ -53,8 +53,6 @@ function Map:update(dt)
         self:change(-1)
     end
 
-    
-
     World:update(dt)
 end
 
